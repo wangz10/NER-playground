@@ -11,7 +11,7 @@ def evaluate_f1(data_true, data_pred):
     y_pred = [None] * n_docs
     
     for i in range(n_docs):
-        y_true[i] = [Entity(data_train[i][0][ent[0]:ent[1]], ent[2], ent[0]) for ent in data_true[i][1]['entities']]
+        y_true[i] = [Entity(data_true[i][0][ent[0]:ent[1]], ent[2], ent[0]) for ent in data_true[i][1]['entities']]
         y_pred[i] = [Entity(ent[0], ent[1], ent[2]) for ent in data_pred[i]]
     
     return nereval.evaluate(y_true, y_pred)
