@@ -1,5 +1,6 @@
 import nereval
 from nereval import Entity
+from spacy import displacy
 
 def evaluate_f1(data_true, data_pred):
     '''
@@ -29,3 +30,13 @@ def evaluate_f1_for_spacy_model(data_true, nlp):
         pred_ents = nlp(data_true[i][0]).ents
         data_pred[i] = [(ent.text, ent.label_, ent.start_char) for ent in pred_ents]
     return evaluate_f1(data_true, data_pred)
+
+
+def display_truth(datum):
+    '''Display a truth document'''
+    ex = [{'text': datum[0], 
+           'ents': [{'start': start, 'end':end, 'label':label} 
+                    for start, end, label in datum[1]['entities']],
+           'title': None
+          }]
+    displacy.render(ex, style='ent', manual=True, jupyter=True)
